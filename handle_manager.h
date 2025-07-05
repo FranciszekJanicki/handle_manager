@@ -8,28 +8,28 @@
 extern "C" {
 #endif
 
-#define DECLARE_HANDLE_MANAGER(HANDLE_NAME, KEY_TYPE, HANDLE_TYPE, NUM_HANDLES) \
-                                                                                \
-    void HANDLE_NAME##_manager_set_handle(KEY_TYPE key, HANDLE_TYPE handle);    \
-                                                                                \
-    HANDLE_TYPE HANDLE_NAME##_manager_get_handle(KEY_TYPE key);
+#define DECLARE_HANDLE_MANAGER(NAME, KEY_TYPE, HANDLE_TYPE, NUM_HANDLES) \
+                                                                         \
+    void NAME##_manager_set(KEY_TYPE key, HANDLE_TYPE handle);           \
+                                                                         \
+    HANDLE_TYPE NAME##_manager_get(KEY_TYPE key);
 
-#define DEFINE_HANDLE_MANAGER(HANDLE_NAME, KEY_TYPE, HANDLE_TYPE, NUM_HANDLES) \
-    static HANDLE_TYPE HANDLE_NAME##_handles[NUM_HANDLES] = {0};               \
-                                                                               \
-    void HANDLE_NAME##_manager_set_handle(KEY_TYPE key, HANDLE_TYPE handle)    \
-    {                                                                          \
-        assert(key < NUM_HANDLES);                                             \
-        assert(!HANDLE_NAME##_handles[key]);                                   \
-        assert(handle);                                                        \
-        HANDLE_NAME##_handles[key] = handle;                                   \
-    }                                                                          \
-                                                                               \
-    HANDLE_TYPE HANDLE_NAME##_manager_get_handle(KEY_TYPE key)                 \
-    {                                                                          \
-        assert(key < NUM_HANDLES);                                             \
-        assert(HANDLE_NAME##_handles[key]);                                    \
-        return HANDLE_NAME##_handles[key];                                     \
+#define DEFINE_HANDLE_MANAGER(NAME, KEY_TYPE, HANDLE_TYPE, NUM_HANDLES) \
+    static HANDLE_TYPE NAME##_manager_handles[NUM_HANDLES] = {0};       \
+                                                                        \
+    void NAME##_manager_set(KEY_TYPE key, HANDLE_TYPE handle)           \
+    {                                                                   \
+        assert(key < NUM_HANDLES);                                      \
+        assert(!NAME##_manager_handles[key]);                           \
+        assert(handle);                                                 \
+        NAME##_manager_handles[key] = handle;                           \
+    }                                                                   \
+                                                                        \
+    HANDLE_TYPE NAME##_manager_get(KEY_TYPE key)                        \
+    {                                                                   \
+        assert(key < NUM_HANDLES);                                      \
+        assert(NAME##_manager_handles[key]);                            \
+        return NAME##_manager_handles[key];                             \
     }
 
 #ifdef __cplusplus
