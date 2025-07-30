@@ -31,11 +31,11 @@ extern "C" {
         HANDLE_NAME##_manager_handles[key] = value;                       \
     }                                                                     \
                                                                           \
-    HANDLE_VALUE NAME##_manager_get(HANDLE_KEY key)                       \
+    HANDLE_VALUE HANDLE_NAME##_manager_get(HANDLE_KEY key)                       \
     {                                                                     \
         assert(key < (NUM_HANDLES));                                      \
-        assert(HANDLE_NAME##_manager_values[key]);                        \
-        return HANDLE_NAME##_manager_values[key];                         \
+        assert(HANDLE_NAME##_manager_handles[key]);                        \
+        return HANDLE_NAME##_manager_handles[key];                         \
     }
 
 #ifdef __cplusplus
